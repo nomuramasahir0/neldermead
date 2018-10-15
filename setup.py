@@ -1,5 +1,5 @@
 # from distutils.core import setup
-from setuptools import setup, find_packages
+from setuptools import setup
 
 # prevent the error when building Windows .exe
 import codecs
@@ -15,7 +15,7 @@ with open("README.md", "r") as fh:
 
 setup(name="neldermead",
       long_description=long_description,
-      version="0.0.1",
+      version="0.0.4",
       description="Nelder-Mead " +
                   "for numerical optimization in Python",
       author="Masahiro Nomura",
@@ -34,7 +34,7 @@ setup(name="neldermead",
           "License :: OSI Approved :: MIT License",
       ],
       keywords=["optimization", "Nelder-Mead"],
-      packages=find_packages(),
+      packages=["neldermead"],
       requires=["numpy", "functools"],
       package_data={'': ['LICENSE']},
       )
