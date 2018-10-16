@@ -4,10 +4,12 @@
 import numpy as np
 from functools import reduce
 
+
 class RealSolution(object):
     def __init__(self, dim):
         self.f = float('nan')
         self.x = np.zeros([dim, 1])
+
 
 class NelderMead:
     def __init__(self, dim, f, simplex, **kwargs):
@@ -16,7 +18,7 @@ class NelderMead:
         self.simplex = [RealSolution(self.dim) for i in range(self.dim + 1)]
         self.no_of_evals = 0
         for i in range(self.dim + 1):
-            self.simplex[i].x = simplex[i]
+            self.simplex[i].x = simplex[:, i].reshape(dim, 1)
             self.simplex[i].f = self.f(self.simplex[i].x)
             print("self.simplex[i].f:{}".format(self.simplex[i].f))
             self.no_of_evals += 1
@@ -104,7 +106,7 @@ class NelderMead:
                     x_list.append(self.simplex[i+1].x)
 
         evals_no_penalty = [self.simplex[i].f for i in range(len(self.simplex))]
-        best_index = np.argmin(evals_no_penalty)
+        best_index = int(np.argmin(evals_no_penalty))
 
         if self.simplex[best_index].f < self.f_best:
             self.f_best = self.simplex[best_index].f

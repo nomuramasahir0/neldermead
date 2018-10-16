@@ -4,6 +4,7 @@
 import numpy as np
 from neldermead.alg import NelderMead
 
+
 def get_regular_simplex(dimension, centroid, gamma):
     angle = -1.0 / dimension
     regular_simplex = np.zeros([dimension+1, dimension])
@@ -26,24 +27,21 @@ def get_regular_simplex(dimension, centroid, gamma):
 
     for i in range(dimension+1):
         regular_simplex[i] = (regular_simplex[i].reshape(dimension,1) - centroid).reshape(dimension,)
-    return regular_simplex
+    return regular_simplex.T
 
 
 def sphere(x):
     return np.sum(x**2)
 
+
 def main():
     dim = 3
     f = sphere
     simplex = get_regular_simplex(dim, -np.ones([dim, 1]) * 0.5, 0.4)
-    print("simplex:{}".format(simplex))
     nm = NelderMead(dim, f, simplex)
 
     x_best, f_best = nm.optimize(100)
     print("x_best:{}, f_best:{}".format(x_best, f_best))
-
-
-
 
 
 if __name__ == '__main__':
