@@ -20,7 +20,6 @@ class NelderMead:
         for i in range(self.dim + 1):
             self.simplex[i].x = simplex[:, i].reshape(dim, 1)
             self.simplex[i].f = self.f(self.simplex[i].x)
-            print("self.simplex[i].f:{}".format(self.simplex[i].f))
             self.no_of_evals += 1
 
         self.delta_e = kwargs.get('delta_e', 2.0)
@@ -41,7 +40,6 @@ class NelderMead:
             constraint_violation = 0.
             for j in range(self.dim):
                 constraint_violation += (-min(0, s.x[j] - self.constraint[j][0]) + max(0, s.x[j] - self.constraint[j][1])) * self.penalty_coef
-            # print("constraint_violation:{}".format(constraint_violation))
             s.f = s.f + constraint_violation
 
     def optimize(self, iterations):
