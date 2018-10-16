@@ -12,12 +12,12 @@ class RealSolution(object):
 class NelderMead:
     def __init__(self, dim, f, simplex, **kwargs):
         self.dim = dim
-        self.obj_func = f
+        self.f = f
         self.simplex = [RealSolution(self.dim) for i in range(self.dim + 1)]
         self.no_of_evals = 0
         for i in range(self.dim + 1):
             self.simplex[i].x = simplex[i]
-            self.simplex[i].f = self.obj_func.evaluate(self.simplex[i].x)
+            self.simplex[i].f = self.f(self.simplex[i].x)
             print("self.simplex[i].f:{}".format(self.simplex[i].f))
             self.no_of_evals += 1
 
@@ -56,7 +56,7 @@ class NelderMead:
         # xr
         xr = RealSolution(self.dim)
         xr.x = xc + (xc - self.simplex[self.dim].x)
-        xr.f = self.obj_func.evaluate(xr.x)
+        xr.f = self.f(xr.x)
         self.no_of_evals += 1
         fval_list.append(xr.f)
         x_list.append(xr.x)
@@ -65,7 +65,7 @@ class NelderMead:
         if xr.f < self.f_best:
             xe = RealSolution(self.dim)
             xe.x = xc + self.delta_e * (xc - self.simplex[self.dim].x)
-            xe.f = self.obj_func.evaluate(xe.x)
+            xe.f = self.f(xe.x)
             self.no_of_evals += 1
             fval_list.append(xe.f)
             x_list.append(xe.f)
@@ -78,7 +78,7 @@ class NelderMead:
         elif self.simplex[self.dim - 1].f <= xr.f and xr.f < self.simplex[self.dim].f:
             xoc = RealSolution(self.dim)
             xoc.x = xc + self.delta_oc * (xc - self.simplex[self.dim].x)
-            xoc.f = self.obj_func.evaluate(xoc.x)
+            xoc.f = self.f(xoc.x)
             self.no_of_evals += 1
             fval_list.append(xoc.f)
             x_list.append(xoc.f)
@@ -89,7 +89,7 @@ class NelderMead:
         else:
             xic = RealSolution(self.dim)
             xic.x = xc + self.delta_ic * (xc - self.simplex[self.dim].x)
-            xic.f = self.obj_func.evaluate(xic.x)
+            xic.f = self.f(xic.x)
             self.no_of_evals += 1
             fval_list.append(xic.f)
             x_list.append(xic.f)
@@ -98,7 +98,7 @@ class NelderMead:
             else:
                 for i in range(self.dim):
                     self.simplex[i+1].x = self.simplex[0].x + self.gamma * (self.simplex[i+1].x - self.simplex[0].x)
-                    self.simplex[i+1].f = self.obj_func.evaluate(self.simplex[i+1].x)
+                    self.simplex[i+1].f = self.f(self.simplex[i+1].x)
                     self.no_of_evals += 1
                     fval_list.append(self.simplex[i+1].f)
                     x_list.append(self.simplex[i+1].x)

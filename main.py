@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from nelder_mead.alg import NelderMead
+from neldermead.alg import NelderMead
 
 def get_regular_simplex(dimension, centroid, gamma):
     angle = -1.0 / dimension
@@ -29,17 +29,12 @@ def get_regular_simplex(dimension, centroid, gamma):
     return regular_simplex
 
 
-class SphereFunction(object):
-    def __init__(self, n):
-        self.n = n
-        self.name = '%dD-SphereFunction' % n
-
-    def evaluate(self, x):
-        return np.sum(x**2)
+def sphere(x):
+    return np.sum(x**2)
 
 def main():
     dim = 3
-    f = SphereFunction(dim)
+    f = sphere
     simplex = get_regular_simplex(dim, -np.ones([dim, 1]) * 0.5, 0.4)
     print("simplex:{}".format(simplex))
     nm = NelderMead(dim, f, simplex)
