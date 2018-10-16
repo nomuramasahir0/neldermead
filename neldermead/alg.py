@@ -68,7 +68,7 @@ class NelderMead:
             xe.f = self.f(xe.x)
             self.no_of_evals += 1
             fval_list.append(xe.f)
-            x_list.append(xe.f)
+            x_list.append(xe.x)
             if xr.f < xe.f:
                 self.simplex[self.dim] = xr
             else:
@@ -81,7 +81,7 @@ class NelderMead:
             xoc.f = self.f(xoc.x)
             self.no_of_evals += 1
             fval_list.append(xoc.f)
-            x_list.append(xoc.f)
+            x_list.append(xoc.x)
             if xr.f < xoc.f:
                 self.simplex[self.dim] = xr
             else:
@@ -92,7 +92,7 @@ class NelderMead:
             xic.f = self.f(xic.x)
             self.no_of_evals += 1
             fval_list.append(xic.f)
-            x_list.append(xic.f)
+            x_list.append(xic.x)
             if xic.f < self.simplex[self.dim].f:
                 self.simplex[self.dim] = xic
             else:
