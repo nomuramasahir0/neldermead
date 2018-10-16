@@ -15,7 +15,7 @@ with open("README.md", "r") as fh:
 
 setup(name="neldermead",
       long_description=long_description,
-      version="0.0.6",
+      version="0.0.7",
       description="Nelder-Mead " +
                   "for numerical optimization in Python",
       author="Masahiro Nomura",
