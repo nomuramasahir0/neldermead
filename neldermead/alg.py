@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from functools import reduce
 
 
 class RealSolution(object):
@@ -52,7 +51,7 @@ class NelderMead:
         fval_list = []
         x_list = []
         # xc
-        xc = reduce(lambda a,b: a+b, [self.simplex[i].x for i in range(self.dim)]) / self.dim
+        xc = np.sum(np.array([self.simplex[i].x for i in range(self.dim)])) / self.dim
         # xr
         xr = RealSolution(self.dim)
         xr.x = xc + (xc - self.simplex[self.dim].x)

@@ -15,7 +15,7 @@ with open("README.md", "r") as fh:
 
 setup(name="neldermead",
       long_description=long_description,
-      version="0.0.8",
+      version="0.0.9",
       description="Nelder-Mead " +
                   "for numerical optimization in Python",
       author="Masahiro Nomura",
@@ -35,6 +35,6 @@ setup(name="neldermead",
       ],
       keywords=["optimization", "Nelder-Mead"],
       packages=["neldermead"],
-      requires=["numpy", "functools"],
+      requires=["numpy"],
       package_data={'': ['LICENSE']},
       )

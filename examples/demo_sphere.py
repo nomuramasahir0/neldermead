@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from neldermead.alg import NelderMead
+from neldermead import NelderMead
 
 
 def get_regular_simplex(dimension, centroid, gamma):
@@ -12,19 +12,14 @@ def get_regular_simplex(dimension, centroid, gamma):
     init_norm = 1
     tmp = 0.0
     for i in range(dimension):
-        nCoord = np.sqrt((init_norm*init_norm) - tmp)
-        regular_simplex[i][i] = nCoord
-        rCoord = (angle - tmp) / nCoord
-
+        n_coord = np.sqrt((init_norm*init_norm) - tmp)
+        regular_simplex[i][i] = n_coord
+        r_coord = (angle - tmp) / n_coord
         for s in range(i+1, dimension+1):
-            regular_simplex[s][i] = rCoord
-
-        tmp += rCoord * rCoord
-    # 最初のノルムをγとして, γ倍拡大
-    # gamma = 1.0
+            regular_simplex[s][i] = r_coord
+        tmp += r_coord * r_coord
     for i in range(dimension+1):
         regular_simplex[i] *= gamma
-
     for i in range(dimension+1):
         regular_simplex[i] = (regular_simplex[i].reshape(dimension,1) - centroid).reshape(dimension,)
     return regular_simplex.T
@@ -36,11 +31,11 @@ def sphere(x):
 
 def main():
     dim = 3
-    f = sphere
-    simplex = get_regular_simplex(dim, -np.ones([dim, 1]) * 0.5, 0.4)
-    nm = NelderMead(dim, f, simplex)
+    iteration_number = 100
 
-    x_best, f_best = nm.optimize(100)
+    simplex = get_regular_simplex(dim, -np.ones([dim, 1]) * 0.5, 0.4)
+    nm = NelderMead(dim, sphere, simplex)
+    x_best, f_best = nm.optimize(iteration_number)
     print("x_best:{}, f_best:{}".format(x_best, f_best))
 
 
