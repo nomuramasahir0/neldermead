@@ -34,9 +34,9 @@ nm = NelderMead(dim, f, simplex)
 
 x_best, f_best = nm.optimize(100)
 print("x_best:{}, f_best:{}".format(x_best, f_best))
-# x_best:[[0.60389863]
-# [0.26992676]
-# [0.13184699]], f_best:0.45493763222718836
+#x_best:[[-1.48045204e-08]
+# [-1.80962770e-08]
+# [ 5.08040874e-08]], f_best:3.1277043680572982e-15
 ```
 
 
