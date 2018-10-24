@@ -28,13 +28,13 @@ def get_regular_simplex(dimension, centroid, gamma):
 def sphere(x):
     return np.sum(x**2)
 
-
 def main():
-    dim = 3
+    dim = 2
     iteration_number = 100
+    f = sphere
 
-    simplex = get_regular_simplex(dim, -np.ones([dim, 1]) * 0.5, 0.4)
-    nm = NelderMead(dim, sphere, simplex)
+    simplex = get_regular_simplex(dim, -np.zeros([dim, 1]), np.sqrt(2.0))
+    nm = NelderMead(dim, f, simplex)
     x_best, f_best = nm.optimize(iteration_number)
     print("x_best:{}, f_best:{}".format(x_best, f_best))
 
