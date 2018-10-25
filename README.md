@@ -2,6 +2,8 @@
 
 Nelder-Mead implementation
 
+[![CircleCI](https://circleci.com/gh/nmasahiro/neldermead.svg?style=shield)](https://circleci.com/gh/nmasahiro/neldermead)
+
 ## Getting Started
 
 
